@@ -1,0 +1,111 @@
+/* Contêiner principal que usa flexbox */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh; 
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .cadastro-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-container {
+    max-width: 50%;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+ 
+  .cadastro-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+ 
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+
+  .form-group label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+ 
+  .form-group input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+
+  .btn-cadastro {
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-cadastro:hover {
+    background-color: #45a049;
+  }
+  
+
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .image-container {
+      margin-top: 20px;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cadastro-container {
+      padding: 10px;
+      max-width: 100%;
+    }
+  
+    h1 {
+      font-size: 1.3rem;
+    }
+  
+    .form-group input {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  
+    .btn-cadastro {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  

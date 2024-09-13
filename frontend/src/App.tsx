@@ -1,26 +1,54 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CadastroMembro from './pages/CadastroMembro/CadastroMembro';
+import CadastroTarefa from './pages/CadastroTarefa';
+import EdicaoTarefa from './pages/EdicaoTarefa';
+import ListagemTarefas from './pages/ListagemTarefas';
+import Login from './pages/Login/Login';
+import Home from './pages/Home';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/cadastro-membro" element={<CadastroMembro />} />
+        <Route
+          path="/cadastro-tarefa"
+          element={
+            <PrivateRoute>
+              <CadastroTarefa />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/listagem-tarefas"
+          element={
+            <PrivateRoute>
+              <ListagemTarefas />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edicao-tarefa/:id"
+          element={
+            <PrivateRoute>
+              <EdicaoTarefa />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
