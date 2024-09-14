@@ -15,7 +15,7 @@ const CadastroTarefa: React.FC<CadastroTarefaProps> = ({ prioridadeInicial, onCl
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const memberId = localStorage.getItem('memberId');
+    const memberId = parseInt(localStorage.getItem('memberId') || '0', 10); // Garantindo que o memberId seja um número
     if (!memberId) {
       alert('Member ID is missing, please login again.');
       return; // Stop the function if memberId is not found
@@ -33,7 +33,6 @@ const CadastroTarefa: React.FC<CadastroTarefaProps> = ({ prioridadeInicial, onCl
       }
     }
   };
-  
   
 
   return (

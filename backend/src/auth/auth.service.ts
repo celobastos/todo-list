@@ -26,17 +26,22 @@ export class AuthService {
   // Função para realizar o login e gerar o JWT
   async login(membroLogin: any) {
     const membro = await this.validateMembro(membroLogin.email, membroLogin.senha);
-
-    
+  
     if (!membro) {
       throw new UnauthorizedException('Email ou senha incorretos');
     }
-
-   
+  
     const payload: JwtPayload = { email: membro.email, sub: membro.id };
-
+  
+    const accessToken = this.jwtService.sign(payload);
+    const memberId = membro.id;
+  
+    console.log('Login successful, memberId:', memberId); // Log the memberId
+  
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: accessToken,
+      memberId: memberId, // Ensure this is returned
     };
   }
+  
 }

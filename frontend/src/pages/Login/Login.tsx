@@ -13,18 +13,19 @@ const Login: React.FC = () => {
     event.preventDefault();
     try {
       const response = await api.post('/auth/login', { email, senha });
-      const { access_token } = response.data;
-
-      // Save the token in localStorage
+      const { access_token, memberId } = response.data;
+  
+      // Save the token and memberId in localStorage
       localStorage.setItem('token', access_token);
-
+      localStorage.setItem('memberId', memberId);
+  
       navigate('/home');
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       alert('Email ou senha incorretos.');
     }
   };
-
+  
   return (
     <div className="main-container">
       {/* Add the "to-doing" title here at the top */}

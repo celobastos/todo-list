@@ -7,32 +7,38 @@ import { Prisma, Tarefa } from '@prisma/client';
 export class TarefaService {
   constructor(private prisma: PrismaService) {}
 
-  async createTarefa(data: Prisma.TarefaCreateInput): Promise<Tarefa> {
-    // Validação de nome (entre 5 e 50 caracteres)
+  async createTarefa(data: Prisma.TarefaCreateInput, memberId: number): Promise<Tarefa> {
+   
     if (!data.nome || data.nome.length < 5 || data.nome.length > 50) {
       throw new Error('Nome deve ter entre 5 e 50 caracteres.');
     }
-
-    // Validação de descrição (no máximo 140 caracteres)
+  
     if (data.descricao && data.descricao.length > 140) {
       throw new Error('Descrição deve ter no máximo 140 caracteres.');
     }
 
-    // Validação de prioridade (pode ser "Baixa", "Média" ou "Alta")
-    const validPrioridades = ['Baixa', 'Média', 'Alta'];
-    if (!data.prioridade || !validPrioridades.includes(data.prioridade)) {
-      throw new Error('Prioridade deve ser "Baixa", "Média" ou "Alta".');
-    }
-
-    // Se a tarefa for marcada como finalizada, registre a data de término
     if (data.finalizada === true) {
       data.dataTermino = new Date();
     }
-
+  
     return this.prisma.tarefa.create({
-      data,
+      data: {
+        nome: data.nome,
+        descricao: data.descricao,
+        prioridade: data.prioridade,
+        finalizada: data.finalizada,
+        dataTermino: data.dataTermino,
+        membro: {
+          connect: {
+            id: memberId,
+          },
+        },
+      },
     });
   }
+  
+  
+  
 
   async getTarefas(): Promise<Tarefa[]> {
     return this.prisma.tarefa.findMany();

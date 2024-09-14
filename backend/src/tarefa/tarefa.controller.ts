@@ -9,8 +9,9 @@ export class TarefaController {
   constructor(private readonly tarefaService: TarefaService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() data: Prisma.TarefaCreateInput) {
-    return this.tarefaService.createTarefa(data);
+  async create(@Body() data: Prisma.TarefaCreateInput,
+  @Body('memberId') memberId: number,) {
+    return this.tarefaService.createTarefa(data,memberId);
   }
 
   @Get()
