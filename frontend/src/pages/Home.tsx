@@ -1,17 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ListagemTarefas from './ListagemTarefas';
+import CadastroTarefa from './CadastroTarefa';
+import './Home.css';
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className="home-container">
       <h1>Bem-vindo ao ToDo List</h1>
-      <nav>
-        <ul>
-          <li><Link to="/cadastro-membro">Cadastro de Membro</Link></li>
-          <li><Link to="/cadastro-tarefa">Cadastro de Tarefa</Link></li>
-          <li><Link to="/listagem-tarefas">Listagem de Tarefas</Link></li>
-        </ul>
-      </nav>
+      <div className="task-board">
+        <div className="task-column baixa">
+          <div className="column-header">Baixa</div>
+        </div>
+        <div className="task-column media">
+          <div className="column-header">Média</div>
+        </div>
+        <div className="task-column alta">
+          <div className="column-header">Alta</div>
+        </div>
+        <div className="task-column urgente">
+          <div className="column-header">Urgente</div>
+        </div>
+        <div className="task-column sos">
+          <div className="column-header">SOS</div>
+        </div>
+      </div>
     </div>
   );
 };
