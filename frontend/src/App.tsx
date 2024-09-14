@@ -18,7 +18,11 @@ const App: React.FC = () => {
           path="/cadastro-tarefa"
           element={
             <PrivateRoute>
-              <CadastroTarefa />
+              <CadastroTarefa prioridadeInicial={''} onClose={function (): void {
+                throw new Error('Function not implemented.');
+              } } onAddTarefa={function (tarefa: any): void {
+                throw new Error('Function not implemented.');
+              } } />
             </PrivateRoute>
           }
         />

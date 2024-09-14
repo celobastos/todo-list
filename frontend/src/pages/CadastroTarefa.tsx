@@ -1,21 +1,40 @@
 import React, { useState } from 'react';
-import api from '../services/api';
+import { createTarefa } from '../services/taskService';
 
-const CadastroTarefa: React.FC = () => {
+interface CadastroTarefaProps {
+  prioridadeInicial: string;
+  onClose: () => void;
+  onAddTarefa: (tarefa: any) => void;
+}
+
+const CadastroTarefa: React.FC<CadastroTarefaProps> = ({ prioridadeInicial, onClose, onAddTarefa }) => {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [prioridade, setPrioridade] = useState('Baixa');
-  
+  const [prioridade, setPrioridade] = useState(prioridadeInicial);
+  const [finalizada, setFinalizada] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const memberId = localStorage.getItem('memberId');
+    if (!memberId) {
+      alert('Member ID is missing, please login again.');
+      return; // Stop the function if memberId is not found
+    }
+    
     try {
-      await api.post('/tarefas', { nome, descricao, prioridade });
-      alert('Tarefa cadastrada com sucesso!');
+      const novaTarefa = await createTarefa({ nome, descricao, prioridade, finalizada }, memberId);
+      onAddTarefa(novaTarefa);
+      onClose();
     } catch (error) {
-      console.error('Erro ao cadastrar tarefa:', error);
-      alert('Erro ao cadastrar tarefa.');
+      if (error instanceof Error) {
+        alert('Erro ao cadastrar tarefa: ' + error.message);
+      } else {
+        alert('Erro ao cadastrar tarefa: Ocorreu um erro desconhecido.');
+      }
     }
   };
+  
+  
 
   return (
     <div>
@@ -37,7 +56,12 @@ const CadastroTarefa: React.FC = () => {
             <option value="Alta">Alta</option>
           </select>
         </div>
+        <div>
+          <label>Finalizada</label>
+          <input type="checkbox" checked={finalizada} onChange={(e) => setFinalizada(e.target.checked)} />
+        </div>
         <button type="submit">Cadastrar</button>
+        <button type="button" onClick={onClose}>Cancelar</button>
       </form>
     </div>
   );
