@@ -13,6 +13,8 @@ const Home: React.FC = () => {
   const [tarefaSelecionada, setTarefaSelecionada] = useState<any | null>(null); // Estado para a tarefa selecionada
   const [showEditModal, setShowEditModal] = useState<boolean>(false); // Estado para o modal de edição
 
+  const memberId = 123; // Substitua pelo valor real do memberId
+
   useEffect(() => {
     const fetchTarefas = async () => {
       try {
@@ -117,6 +119,7 @@ const Home: React.FC = () => {
           onSave={(updatedTarefa) => {
             setTarefas(tarefas.map(t => (t.id === updatedTarefa.id ? updatedTarefa : t)));
           }}
+          memberId={memberId} // Passando o memberId para o EditTarefaModal
         />
       )}
     </div>

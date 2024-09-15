@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
-//import './EditTarefaModal.css'; // Estilos para o modal de edição
+import './EditTarefaModal.css';
+import { updateTarefa } from '../services/taskService'; // Importando o serviço de API
 
 interface EditTarefaModalProps {
   tarefa: { id: number; nome: string; descricao?: string; prioridade: string; finalizada: boolean };
   onClose: () => void;
-  onSave: (updatedTarefa: any) => void; // Função para salvar a tarefa editada
+  onSave: (updatedTarefa: any) => void;
+  memberId: number;
 }
 
-const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSave }) => {
-  const [editedTarefa, setEditedTarefa] = useState(tarefa); // Estado local para as mudanças na tarefa
+const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSave, memberId }) => {
+  const [editedTarefa, setEditedTarefa] = useState({
+    ...tarefa,
+    descricao: tarefa.descricao || '' // Garante que 'descricao' seja sempre uma string
+  });
+  const [loading, setLoading] = useState(false); // Estado de loading para o feedback
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setEditedTarefa({ ...editedTarefa, [name]: value });
   };
 
-  const handleSave = () => {
-    onSave(editedTarefa); // Chama a função de salvar passando a tarefa editada
-    onClose(); // Fecha o modal
+  const handleSave = async () => {
+    setLoading(true); // Mostra o estado de carregamento
+    try {
+      await updateTarefa(editedTarefa, memberId); // Chama o serviço API para salvar no banco
+      onSave(editedTarefa); // Atualiza o frontend
+    } catch (error) {
+      console.error('Erro ao salvar a tarefa:', error);
+      alert('Erro ao salvar a tarefa.');
+    } finally {
+      setLoading(false); // Termina o loading
+      onClose(); // Fecha o modal
+    }
   };
 
   return (
@@ -38,7 +53,7 @@ const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSa
           <input
             type="text"
             name="descricao"
-            value={editedTarefa.descricao || ''}
+            value={editedTarefa.descricao}
             onChange={handleChange}
           />
         </label>
@@ -66,7 +81,9 @@ const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSa
             }
           />
         </label>
-        <button onClick={handleSave}>Salvar</button>
+        <button onClick={handleSave} disabled={loading}>
+          {loading ? 'Salvando...' : 'Salvar'}
+        </button>
         <button onClick={onClose}>Cancelar</button>
       </div>
     </div>
