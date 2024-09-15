@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Headers } from '@nestjs/common';
 import { TarefaService } from './tarefa.service';
 import { Prisma } from '@prisma/client';
 import { UseGuards } from '@nestjs/common';
@@ -27,13 +27,16 @@ export class TarefaController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() data: Prisma.TarefaUpdateInput, @Body('memberId') memberId: number) {
-    console.log('Member ID no controlador:', memberId); // Verifique se o memberId está chegando corretamente
+    console.log('Member ID no controlador:', memberId);
     return this.tarefaService.updateTarefa(Number(id), data, memberId);
   }
   
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.tarefaService.deleteTarefa(Number(id));
-  }
+  @UseGuards(JwtAuthGuard)
+@Delete(':id')
+async remove(@Param('id') id: string, @Headers('memberid') memberId: string) {
+  console.log('Member ID no controlador (delete):', memberId);
+  return this.tarefaService.deleteTarefa(Number(id), Number(memberId));
+}
+
 }

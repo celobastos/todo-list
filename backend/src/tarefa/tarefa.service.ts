@@ -57,7 +57,6 @@ export class TarefaService {
     console.log('Member ID do usuário autenticado:', memberId);
     console.log('Membro ID da tarefa:', tarefaExistente.membroId);
   
-    // Convertendo ambos para o mesmo tipo (número) antes de comparar
     if (Number(tarefaExistente.membroId) !== Number(memberId)) {
       throw new Error('Você não tem permissão para editar esta tarefa.');
     }
@@ -103,11 +102,24 @@ export class TarefaService {
   
   
 
-  async deleteTarefa(id: number): Promise<Tarefa> {
-
+    async deleteTarefa(id: number, memberId: number): Promise<Tarefa> {
+  
+      const tarefaExistente = await this.prisma.tarefa.findUnique({
+        where: { id },
+      });
     
-    return this.prisma.tarefa.delete({
-      where: { id },
-    });
-  }
+      if (!tarefaExistente) {
+        throw new Error('Tarefa não encontrada.');
+      }
+
+      if (Number(tarefaExistente.membroId) !== Number(memberId)) {
+        throw new Error('Você não tem permissão para deletar esta tarefa.');
+      }
+    
+    
+      return this.prisma.tarefa.delete({
+        where: { id },
+      });
+    }
+    
 }

@@ -12,12 +12,26 @@ export const getTarefas = async () => {
 
 export const deleteTarefa = async (id: number) => {
   try {
-    await api.delete(`/tarefas/${id}`);
+    const memberId = localStorage.getItem('memberId'); 
+    const token = localStorage.getItem('token');
+
+    if (!memberId || !token) {
+      throw new Error('Member ID ou token não encontrado.');
+    }
+
+    await api.delete(`/tarefas/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        memberid: memberId, 
+      },
+    });
   } catch (error) {
     console.error('Erro ao deletar tarefa:', error);
     throw error;
   }
 };
+
+
 export const createTarefa = async (tarefaData: { nome: string; descricao: string; prioridade: string; finalizada: boolean; }, memberId: number) => {
     const token = localStorage.getItem('token');
     const response = await api.post('/tarefas', { ...tarefaData, memberId }, {
