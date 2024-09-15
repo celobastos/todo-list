@@ -13,11 +13,11 @@ interface TaskItemProps {
 
 const TaskItem: React.FC<TaskItemProps> = ({ tarefa, onDelete }) => {
   return (
-    <li>
-      <p>Nome: {tarefa.nome}</p>
-      <p>Prioridade: {tarefa.prioridade}</p>
-      <p>{tarefa.finalizada ? 'Finalizada' : 'Pendente'}</p>
-      <button onClick={() => onDelete(tarefa.id)}>Deletar</button>
+    <li className="task-item">
+      <button className="task-item-delete-btn" onClick={() => onDelete(tarefa.id)}>x</button>
+      <p className="task-item-name">Nome: {tarefa.nome}</p>
+      <p className="task-item-priority">Prioridade: {tarefa.prioridade}</p>
+      <p className="task-item-status">{tarefa.finalizada ? 'Finalizada' : 'Pendente'}</p>
     </li>
   );
 };

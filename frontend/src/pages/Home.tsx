@@ -75,9 +75,9 @@ const Home: React.FC = () => {
           onDelete={handleDelete}
         />
         <TaskColumn
-          title="SOS"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'SOS')}
-          onAddTarefa={() => handleShowCadastro('SOS')}
+          title="Feitas"
+          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Feitas')}
+          onAddTarefa={() => handleShowCadastro('Feitas')}
           onDelete={handleDelete}
         />
       </div>

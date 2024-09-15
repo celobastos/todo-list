@@ -1,0 +1,74 @@
+/* TaskColumn.css */
+
+.task-column-container {
+    flex: 1;
+    background-color:  white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 2vw;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 70vh;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    position: relative;
+  }
+
+
+.task-column-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.task-column-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.task-column-container::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+}
+
+.task-column-container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+  
+  .task-column-header {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color:  #fff4dc;
+    width: 93%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 2vh;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    
+  }
+  
+  .task-column-add-btn {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2vh;
+    padding: 1.5vh 3vw;
+    margin-left: 0.9vw;
+    border: none;
+    border-radius: 4px;
+    background-color: #92a519;
+    color: white;
+    cursor: pointer;
+    width: 90%;
+    margin-bottom: 2vh;
+    position: sticky;
+    bottom: 2vh;
+    z-index: 1;
+  }
+  
+  .task-column-add-btn:hover {
+    background-color: darkblue;
+  }
+  

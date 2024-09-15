@@ -1,31 +1,48 @@
 .task-item {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  list-style-type: none;
+  margin-bottom: 2vh;
+  border-radius: 1vw;
+  margin-left: 0.9vw;
+  margin-right: 1vw;
+  width: 90%;
+  max-width: 600px;
+  position: relative; 
+  margin-top: 1vh;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background-color:white;
+}
+
+.task-item-name,
+.task-item-priority,
+.task-item-status {
+  margin-left: 1vw;
+}
+
+.task-item-delete-btn {
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+  background-color: transparent;
+  color: red;
+  font-size: 1.5vh;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.task-item-delete-btn:hover {
+  color: darkred;
+}
+
+@media (max-width: 768px) {
+  .task-item {
+    padding: 1.5vh;
+    margin-bottom: 3vh;
+    border-radius: 2vw;
   }
-  
-  .task-item p {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
+
+  .task-item-delete-btn {
+    font-size: 4vw;
   }
-  
-  .task-item button {
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .task-item button:hover {
-    background-color: #0056b3;
-  }
-  
+}
