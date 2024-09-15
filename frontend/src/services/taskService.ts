@@ -30,11 +30,14 @@ export const createTarefa = async (tarefaData: { nome: string; descricao: string
 
   export const updateTarefa = async (tarefaData: { id: number; nome: string; descricao: string; prioridade: string; finalizada: boolean }, memberId: number) => {
     const token = localStorage.getItem('token');
+    console.log('memberId: ', memberId);
     const response = await api.put(`/tarefas/${tarefaData.id}`, { ...tarefaData, memberId }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      
     });
+    console.log(memberId, 'membroId:')
     return response.data;
   };
   

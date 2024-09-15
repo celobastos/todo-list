@@ -24,10 +24,13 @@ export class TarefaController {
     return this.tarefaService.getTarefaById(Number(id));
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async update(@Param('id') id: string, @Body() data: Prisma.TarefaUpdateInput) {
-    return this.tarefaService.updateTarefa(Number(id), data);
+  async update(@Param('id') id: string, @Body() data: Prisma.TarefaUpdateInput, @Body('memberId') memberId: number) {
+    console.log('Member ID no controlador:', memberId); // Verifique se o memberId está chegando corretamente
+    return this.tarefaService.updateTarefa(Number(id), data, memberId);
   }
+  
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
