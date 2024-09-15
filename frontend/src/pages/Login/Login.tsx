@@ -28,10 +28,8 @@ const Login: React.FC = () => {
   
   return (
     <div className="main-container">
-      {/* Add the "to-doing" title here at the top */}
       <h2 className="to-doing-title">to-doing</h2>
 
-      {/* Flexbox container for the login form and image */}
       <div className="content-container">
         <div className="login-container">
           <h1>Login</h1>
@@ -51,7 +49,6 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        {/* Div for the image beside the login form */}
         <div className="image-container">
           <img src={assetLogin} alt="Imagem de exemplo" />
         </div>

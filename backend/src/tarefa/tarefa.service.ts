@@ -49,37 +49,45 @@ export class TarefaService {
       where: { id },
     });
   }
-  async updateTarefa(id: number, data: Prisma.TarefaUpdateInput): Promise<Tarefa> {
-    // Verifica se a tarefa já está finalizada e impede alterações se estiver
-    const tarefaExistente = await this.prisma.tarefa.findUnique({
-      where: { id },
-    });
-    if (tarefaExistente?.finalizada) {
-      throw new Error('Não é possível editar uma tarefa que já foi finalizada.');
+    async updateTarefa(id: number, data: Prisma.TarefaUpdateInput): Promise<Tarefa> {
+      const tarefaExistente = await this.prisma.tarefa.findUnique({
+        where: { id },
+      });
+    
+      if (!tarefaExistente) {
+        throw new Error('Tarefa não encontrada');
+      }
+    
+      if (tarefaExistente.finalizada) {
+        throw new Error('Não é possível editar uma tarefa que já foi finalizada.');
+      }
+    
+      const validPrioridades = ['Baixa', 'Média', 'Alta', 'Urgente'];
+      if (data.prioridade && typeof data.prioridade === 'string' && !validPrioridades.includes(data.prioridade)) {
+        throw new Error('Prioridade deve ser "Baixa", "Média", "Alta" ou "Urgente".');
+      }
+    
+      if (data.finalizada === true && !tarefaExistente.finalizada) {
+        data.dataTermino = { set: new Date() }; 
+      }
+    
+     
+      return this.prisma.tarefa.update({
+        where: { id },
+        data: {
+          nome: data.nome ? { set: data.nome as string } : undefined,
+          descricao: data.descricao ? { set: data.descricao as string } : undefined,
+          prioridade: data.prioridade ? { set: data.prioridade as string } : undefined,
+          finalizada: data.finalizada,
+          dataTermino: data.dataTermino,
+          membro: {
+            connect: { id: tarefaExistente.membroId },
+          },
+        },
+      });
     }
+    
   
-    // Validação de prioridade ao atualizar
-    const validPrioridades = ['Baixa', 'Média', 'Alta'];
-    if (data.prioridade && typeof data.prioridade === 'string' && !validPrioridades.includes(data.prioridade)) {
-      throw new Error('Prioridade deve ser "Baixa", "Média" ou "Alta".');
-    }
-  
-    // Se a tarefa for marcada como finalizada, registre a data de término
-    if (data.finalizada === true && !tarefaExistente.finalizada) {
-      data.dataTermino = { set: new Date() }; // Usando `set` para atribuir a data de término
-    }
-  
-    // Atualiza a tarefa com os dados fornecidos
-    return this.prisma.tarefa.update({
-      where: { id },
-      data: {
-        ...data,
-        nome: typeof data.nome === 'string' ? { set: data.nome } : data.nome, // Corrige a atualização do campo 'nome'
-        descricao: typeof data.descricao === 'string' ? { set: data.descricao } : data.descricao, // Corrige a atualização do campo 'descricao'
-        prioridade: typeof data.prioridade === 'string' ? { set: data.prioridade } : data.prioridade, // Corrige a atualização do campo 'prioridade'
-      },
-    });
-  }
   
 
   async deleteTarefa(id: number): Promise<Tarefa> {

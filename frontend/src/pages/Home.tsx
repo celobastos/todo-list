@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskColumn from '../components/TaskColumn';
 import Modal from '../components/Modal';
 import CadastroTarefa from './CadastroTarefa';
-import EditTarefaModal from '../components/EditTarefaModal'; // Adicionando o modal de edição
+import EditTarefaModal from '../components/EditTarefaModal'; 
 import { getTarefas, deleteTarefa } from '../services/taskService';
 import './Home.css';
 
@@ -10,10 +10,10 @@ const Home: React.FC = () => {
   const [tarefas, setTarefas] = useState<any[]>([]);
   const [showCadastro, setShowCadastro] = useState<boolean>(false);
   const [prioridadeSelecionada, setPrioridadeSelecionada] = useState<string>('');
-  const [tarefaSelecionada, setTarefaSelecionada] = useState<any | null>(null); // Estado para a tarefa selecionada
-  const [showEditModal, setShowEditModal] = useState<boolean>(false); // Estado para o modal de edição
+  const [tarefaSelecionada, setTarefaSelecionada] = useState<any | null>(null); 
+  const [showEditModal, setShowEditModal] = useState<boolean>(false); 
 
-  const memberId = 123; // Substitua pelo valor real do memberId
+  const memberId = localStorage.getItem('memberId');
 
   useEffect(() => {
     const fetchTarefas = async () => {
@@ -51,9 +51,9 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleTaskSelect = (tarefa: any) => { // Função para selecionar tarefa e mostrar modal
+  const handleTaskSelect = (tarefa: any) => { 
     setTarefaSelecionada(tarefa);
-    setShowEditModal(true); // Exibir o modal de edição
+    setShowEditModal(true); 
   };
 
   const handleCloseEditModal = () => {
@@ -63,42 +63,42 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
-      <h1>Bem-vindo ao ToDo List</h1>
+      <h1>Bem-vindo ao to-doing</h1>
       <div className="task-board">
         <TaskColumn
           title="Baixa"
           tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Baixa')}
           onAddTarefa={() => handleShowCadastro('Baixa')}
           onDelete={handleDelete}
-          onSelect={handleTaskSelect} // Passando o onSelect para o TaskColumn
+          onSelect={handleTaskSelect}
         />
         <TaskColumn
           title="Média"
           tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Média')}
           onAddTarefa={() => handleShowCadastro('Média')}
           onDelete={handleDelete}
-          onSelect={handleTaskSelect} // Passando o onSelect para o TaskColumn
+          onSelect={handleTaskSelect}
         />
         <TaskColumn
           title="Alta"
           tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Alta')}
           onAddTarefa={() => handleShowCadastro('Alta')}
           onDelete={handleDelete}
-          onSelect={handleTaskSelect} // Passando o onSelect para o TaskColumn
+          onSelect={handleTaskSelect} 
         />
         <TaskColumn
           title="Urgente"
           tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Urgente')}
           onAddTarefa={() => handleShowCadastro('Urgente')}
           onDelete={handleDelete}
-          onSelect={handleTaskSelect} // Passando o onSelect para o TaskColumn
+          onSelect={handleTaskSelect} 
         />
         <TaskColumn
           title="Feitas"
           tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Feitas')}
           onAddTarefa={() => handleShowCadastro('Feitas')}
           onDelete={handleDelete}
-          onSelect={handleTaskSelect} // Passando o onSelect para o TaskColumn
+          onSelect={handleTaskSelect} 
         />
       </div>
 
@@ -119,7 +119,7 @@ const Home: React.FC = () => {
           onSave={(updatedTarefa) => {
             setTarefas(tarefas.map(t => (t.id === updatedTarefa.id ? updatedTarefa : t)));
           }}
-          memberId={memberId} // Passando o memberId para o EditTarefaModal
+          memberId={Number(memberId)}
         />
       )}
     </div>
