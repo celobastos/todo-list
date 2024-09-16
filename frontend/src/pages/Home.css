@@ -46,6 +46,14 @@
 }
 
 .logout-button:hover {
-  color: #000;
+  color: #000; 
 }
 
+
+.welcome-message {
+  font-size: 1.1vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  color: #333;
+  align-self: start;
+}

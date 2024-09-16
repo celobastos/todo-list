@@ -5,6 +5,7 @@ import Modal from '../components/Modal';
 import CadastroTarefa from './CadastroTarefa';
 import EditTarefaModal from '../components/EditTarefaModal'; 
 import { getTarefas, deleteTarefa } from '../services/taskService';
+
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -77,6 +78,8 @@ const Home: React.FC = () => {
           <i className="fas fa-arrow-right"></i>
         </button>
       </div>
+
+      <h2 className="welcome-message">To-doing, o seu gerenciador de tarefas preferido</h2>
 
       <div className="task-board">
         <TaskColumn

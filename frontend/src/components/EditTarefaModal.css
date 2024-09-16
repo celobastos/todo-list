@@ -66,16 +66,9 @@
 }
 
 .modal-content button:hover {
-  background-color: #45a049;
+  background-color: #6e7d0c;
 }
 
-.modal-content .cancel-btn {
-  background-color: #f44336;
-}
-
-.modal-content .cancel-btn:hover {
-  background-color: #e53935;
-}
 
 .modal-content .checkbox-group {
   display: flex;
