@@ -111,13 +111,12 @@ const Home: React.FC = () => {
         />
         <TaskColumn
           title="Feitas"
-          tarefas={tarefas.filter(tarefa => tarefa.finalizada)} 
+          tarefas={tarefas.filter(tarefa => tarefa.finalizada)}
           onAddTarefa={() => handleShowCadastro('Feitas')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect} 
         />
       </div>
-
       {showCadastro && (
         <Modal onClose={handleCloseCadastro}>
           <CadastroTarefa

@@ -1,5 +1,5 @@
 import React from 'react';
-import './TaskColumn.css';  // Import the updated CSS
+import './TaskColumn.css';
 import TaskItem from './TaskItem';
 
 interface TaskColumnProps {
@@ -13,9 +13,9 @@ interface TaskColumnProps {
 const TaskColumn: React.FC<TaskColumnProps> = ({ title, tarefas, onAddTarefa, onDelete, onSelect }) => {
   return (
     <div className="task-column-container">
-      <div className="task-column-header">{title}</div>
+      <div className={`task-column-header ${title.toLowerCase()}`}>{title}</div>
       {tarefas.map((tarefa) => (
-        <TaskItem key={tarefa.id} tarefa={tarefa} onDelete={onDelete} onSelect={onSelect} /> 
+        <TaskItem key={tarefa.id} tarefa={tarefa} onDelete={onDelete} onSelect={onSelect} />
       ))}
       <button className="task-column-add-btn" onClick={onAddTarefa}>Adicionar Tarefa</button>
     </div>
