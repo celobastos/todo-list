@@ -9,12 +9,12 @@ interface TaskItemProps {
     prioridade: string;
   };
   onDelete: (id: number) => void;
-  onSelect: (tarefa: any) => void; // Adicionando onSelect para abrir o modal
+  onSelect: (tarefa: any) => void; 
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ tarefa, onDelete, onSelect }) => {
   return (
-    <li className="task-item" onClick={() => onSelect(tarefa)}> {/* Adicionando clique para abrir o modal */}
+    <li className="task-item" onClick={() => onSelect(tarefa)}> 
       <button className="task-item-delete-btn" onClick={(e) => { e.stopPropagation(); onDelete(tarefa.id); }}>x</button>
       <p className="task-item-name">Nome: {tarefa.nome}</p>
       <p className="task-item-priority">Prioridade: {tarefa.prioridade}</p>

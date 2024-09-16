@@ -1,44 +1,118 @@
 .modal-edit-tarefa {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2vw;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 3vh 2vw;
+  border-radius: 1vw;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.modal-content h2 {
+  margin-bottom: 2vh;
+  font-size: 2.2vh;
+  color: #333;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 1.5vh;
+  font-size: 1.8vh;
+  color: #555;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 1.2vh 1vw;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  border: 1px solid #ddd;
+  border-radius: 0.8vw;
+  box-sizing: border-box;
+  font-size: 1.6vh;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.modal-content button {
+  padding: 1.5vh 3vw;
+  margin-right: 1vw;
+  border: none;
+  border-radius: 1vw;
+  font-size: 1.6vh;
+  cursor: pointer;
+  background-color: #92a519;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #45a049;
+}
+
+.modal-content .cancel-btn {
+  background-color: #f44336;
+}
+
+.modal-content .cancel-btn:hover {
+  background-color: #e53935;
+}
+
+.modal-content .checkbox-group {
+  display: flex;
+  align-items: center; 
+  margin-bottom: 2vh;
+}
+
+.modal-content .checkbox-group label {
+  margin-left: 1vw; 
+  font-size: 1.6vh;
+  color: #555;
+}
+
+.modal-content .checkbox-group input[type="checkbox"] {
+  width: auto; 
+  margin-right: 1vw;
+}
+
+
+@media (max-width: 768px) {
   .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 4vh 4vw;
   }
-  
+
   .modal-content h2 {
-    margin-bottom: 15px;
+    font-size: 2vh;
   }
-  
-  .modal-content label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
+
   .modal-content input,
   .modal-content select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    font-size: 1.4vh;
+    padding: 1.5vh;
   }
-  
+
   .modal-content button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    padding: 1.8vh 4vw;
+    font-size: 1.5vh;
   }
-  
+}

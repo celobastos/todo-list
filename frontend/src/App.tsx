@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CadastroMembro from './pages/CadastroMembro/CadastroMembro';
 import CadastroTarefa from './pages/CadastroTarefa';
-import EdicaoTarefa from './pages/EdicaoTarefa';
 import ListagemTarefas from './pages/ListagemTarefas';
 import Login from './pages/Login/Login';
 import Home from './pages/Home';
@@ -31,14 +30,6 @@ const App: React.FC = () => {
           element={
             <PrivateRoute>
               <ListagemTarefas />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/edicao-tarefa/:id"
-          element={
-            <PrivateRoute>
-              <EdicaoTarefa />
             </PrivateRoute>
           }
         />

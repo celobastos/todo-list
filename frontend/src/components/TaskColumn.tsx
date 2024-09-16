@@ -7,7 +7,7 @@ interface TaskColumnProps {
   tarefas: Array<{ id: number; nome: string; finalizada: boolean; prioridade: string }>;
   onAddTarefa: () => void;
   onDelete: (id: number) => void;
-  onSelect: (tarefa: any) => void; // Adicionando onSelect
+  onSelect: (tarefa: any) => void; 
 }
 
 const TaskColumn: React.FC<TaskColumnProps> = ({ title, tarefas, onAddTarefa, onDelete, onSelect }) => {

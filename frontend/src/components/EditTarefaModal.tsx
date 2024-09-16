@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './EditTarefaModal.css';
-import { updateTarefa } from '../services/taskService'; // Importando o serviço de API
-
+import { updateTarefa } from '../services/taskService';
 interface EditTarefaModalProps {
   tarefa: { id: number; nome: string; descricao?: string; prioridade: string; finalizada: boolean };
   onClose: () => void;
@@ -12,9 +11,9 @@ interface EditTarefaModalProps {
 const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSave, memberId }) => {
   const [editedTarefa, setEditedTarefa] = useState({
     ...tarefa,
-    descricao: tarefa.descricao || '' // Garante que 'descricao' seja sempre uma string
+    descricao: tarefa.descricao || '' 
   });
-  const [loading, setLoading] = useState(false); // Estado de loading para o feedback
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -22,16 +21,16 @@ const EditTarefaModal: React.FC<EditTarefaModalProps> = ({ tarefa, onClose, onSa
   };
 
   const handleSave = async () => {
-    setLoading(true); // Mostra o estado de carregamento
+    setLoading(true); 
     try {
-      await updateTarefa(editedTarefa, memberId); // Chama o serviço API para salvar no banco
-      onSave(editedTarefa); // Atualiza o frontend
+      await updateTarefa(editedTarefa, memberId); 
+      onSave(editedTarefa); 
     } catch (error) {
       console.error('Erro ao salvar a tarefa:', error);
       alert('Erro ao salvar a tarefa.');
     } finally {
-      setLoading(false); // Termina o loading
-      onClose(); // Fecha o modal
+      setLoading(false); 
+      onClose();
     }
   };
 

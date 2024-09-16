@@ -11,7 +11,6 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
     <div className="modal-background">
       <div className="modal-content">
         {children}
-        <button onClick={onClose}>Fechar</button>
       </div>
     </div>
   );
