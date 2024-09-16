@@ -5,7 +5,6 @@ import Modal from '../components/Modal';
 import CadastroTarefa from './CadastroTarefa';
 import EditTarefaModal from '../components/EditTarefaModal'; 
 import { getTarefas, deleteTarefa } from '../services/taskService';
-
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -84,35 +83,35 @@ const Home: React.FC = () => {
       <div className="task-board">
         <TaskColumn
           title="Baixa"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Baixa')}
+          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Baixa' && !tarefa.finalizada)}
           onAddTarefa={() => handleShowCadastro('Baixa')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect}
         />
         <TaskColumn
           title="Média"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Média')}
+          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Média' && !tarefa.finalizada)}
           onAddTarefa={() => handleShowCadastro('Média')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect}
         />
         <TaskColumn
           title="Alta"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Alta')}
+          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Alta' && !tarefa.finalizada)}
           onAddTarefa={() => handleShowCadastro('Alta')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect} 
         />
         <TaskColumn
           title="Urgente"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Urgente')}
+          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Urgente' && !tarefa.finalizada)}
           onAddTarefa={() => handleShowCadastro('Urgente')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect} 
         />
         <TaskColumn
           title="Feitas"
-          tarefas={tarefas.filter(tarefa => tarefa.prioridade === 'Feitas')}
+          tarefas={tarefas.filter(tarefa => tarefa.finalizada)} 
           onAddTarefa={() => handleShowCadastro('Feitas')}
           onDelete={handleDelete}
           onSelect={handleTaskSelect} 
