@@ -83,6 +83,7 @@ O frontend foi desenvolvido com **React** e fornece uma interface de usuário in
 - **Node.js** (versão 14 ou superior)
 - **MySQL**
 
+
 ### Passos de Instalação
 
 1. Clone o repositório:
@@ -122,10 +123,52 @@ O frontend foi desenvolvido com **React** e fornece uma interface de usuário in
    npm install
    ```
 
-7. Inicie o frontend:
+### Frontend
+
+O frontend foi desenvolvido utilizando **React**, criando uma interface amigável e responsiva para os usuários interagirem com suas tarefas.
+
+- **Login e Cadastro**:
+  - O usuário pode se registrar com um email e senha e, após o login, um token JWT é armazenado no `localStorage`. Esse token é utilizado para autenticar todas as requisições subsequentes.
+  
+- **Cadastro de Tarefas**:
+  - O usuário pode adicionar novas tarefas definindo nome, descrição, prioridade e status de finalização. A tarefa é então associada ao membro autenticado.
+
+- **Edição e Exclusão de Tarefas**:
+  - As tarefas podem ser editadas e excluídas diretamente da interface. Um modal interativo é exibido para edição, permitindo que o usuário modifique os campos da tarefa.
+  - Tarefas finalizadas não podem ser editadas e são movidas automaticamente para a coluna de "Tarefas Feitas".
+
+- **Listagem de Tarefas**:
+  - As tarefas são listadas em colunas separadas por prioridade. O usuário pode ver todas as tarefas criadas e editá-las ou excluí-las diretamente da página principal.
+
+- **Logout**:
+  - O sistema permite que o usuário se deslogue, removendo o token JWT do `localStorage` e retornando à página de login.
+
+### Passos de Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/todo-list.git
+   cd todo-list
+   ```
+
+2. Instale as dependências do frontend:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. Inicie o frontend:
    ```bash
    npm start
    ```
+
+### Uso
+
+1. Acesse `http://localhost:3000` no navegador.
+2. Registre um novo membro ou faça login com uma conta existente.
+3. Adicione, edite e exclua suas tarefas diretamente na interface interativa.
+4. Use o botão de logout para sair da conta e retornar à tela de login.
+
 
 ### Uso
 
