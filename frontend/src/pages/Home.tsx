@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TaskColumn from '../components/TaskColumn';
 import Modal from '../components/Modal';
 import CadastroTarefa from './CadastroTarefa';
@@ -13,6 +14,7 @@ const Home: React.FC = () => {
   const [tarefaSelecionada, setTarefaSelecionada] = useState<any | null>(null); 
   const [showEditModal, setShowEditModal] = useState<boolean>(false); 
 
+  const navigate = useNavigate();
   const memberId = localStorage.getItem('memberId');
 
   useEffect(() => {
@@ -61,9 +63,21 @@ const Home: React.FC = () => {
     setTarefaSelecionada(null);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('memberId');
+    navigate('/');
+  };
+
   return (
     <div className="home-container">
-      <h1>Bem-vindo ao to-doing</h1>
+      <div className="header-container">
+        <div className="header-title">to-doing</div>
+        <button className="logout-button" onClick={handleLogout}>
+          <i className="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
       <div className="task-board">
         <TaskColumn
           title="Baixa"

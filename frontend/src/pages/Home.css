@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:  #fff4dc;
-  height: 94vh ;
+  background-color: #fff4dc;
+  height: 94vh;
 }
 
 .task-board {
@@ -15,5 +15,37 @@
   width: 100%;
   margin-top: 20px;
   margin-right: 4vw;
-  background-color:  #fff4dc;
+  background-color: #fff4dc;
 }
+
+.header-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff4dc;
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+  font-size: 2vw;
+  font-weight: bold;
+  color: #000000;
+  margin-left: 2vw;
+  margin-bottom: 2vh;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  font-size: 1.5vw;
+  cursor: pointer;
+  color: #333;
+  margin-bottom: 2vh;
+  margin-right: 2vw;
+}
+
+.logout-button:hover {
+  color: #000;
+}
+
